@@ -151,9 +151,28 @@ Supports **ESP32-S3 V2 boards** with ILI9341 2.4" TFT display, PCF8574 I/O expan
 
 ## Credits
 
-- Original project by [CiferTech](https://github.com/cifertech/ESP32-DIV)
-- SPI bus architecture fix by [JesseCHale](https://github.com/JesseCHale/ESP32-DIV)
-- Kilaz enhancements by ICBizLabs
+### Original Project
+- **[CiferTech](https://github.com/cifertech/ESP32-DIV)** — Original ESP32-DIV project
+- **[JesseCHale](https://github.com/JesseCHale/ESP32-DIV)** — SPI bus architecture fix (HSPI for touch, VSPI for radios)
+- **Kilaz Edition** enhancements by ICBizLabs
+
+### Ported Code & Data Sources
+- **[ProtoPirate](https://github.com/MatthewKuKanworworitch/ProtoPirate)** — Automotive protocol decoders, KeeLoq cipher, TEA cipher (ported to ESP32, no Flipper dependencies)
+- **[Flipper Zero](https://github.com/flipperdevices/flipperzero-firmware)** — IR file format (`.ir`), SubGHz file format (`.sub`), frequency analyzer design reference
+- **[ELECHOUSE](https://github.com/LSatan/SmartRC-CC1101-Driver-Lib)** — CC1101 driver library (patched with MISO timeout fixes and ESP32-S3 SPI remapping). Original by Michael (elechouse.com), mod by Little Satan with permission from Wilson Shen
+- **[colonelpanichacks/flock-you](https://github.com/colonelpanichacks/flock-you)** — BLE device detection signatures used in Flock Detect
+- **[rtlamr](https://github.com/bemasher/rtlamr)** — AMR smart meter protocol reference (SCM, SCM+, IDM)
+- **[IEEE](https://standards-oui.ieee.org/)** — OUI vendor database for MAC address manufacturer lookup
+- **[Bluetooth SIG](https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers/)** — Company identifier assignments for tracker detection
+
+### Libraries
+- **[TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)** by Bodmer — Display driver
+- **[NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino)** by h2zero — BLE stack (v1.4.x)
+- **[RF24](https://github.com/nRF24/RF24)** by TMRh20 — nRF24L01+ driver
+- **[IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)** by David Conran — IR transmit/receive
+- **[XPT2046_Touchscreen](https://github.com/PaulStoffregen/XPT2046_Touchscreen)** by Paul Stoffregen — Touch controller
+- **[PCF8574](https://github.com/xreef/PCF8574_library)** by Renzo Mischianti — I/O expander for buttons
+- **[ArduinoFFT](https://github.com/kosme/arduinoFFT)** by kosme — FFT for spectrum analysis
 
 <div>&nbsp;</div>
 
