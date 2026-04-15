@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>ESP32-DIV Kilaz Edition - Web Installer</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0d1117; color: #c9d1d9; display: flex; justify-content: center; padding: 2rem 1rem; min-height: 100vh; }
+    .container { max-width: 620px; width: 100%; }
+    h1 { color: #e6edf3; font-size: 1.75rem; text-align: center; margin-bottom: 0.25rem; }
+    .subtitle { text-align: center; color: #8b949e; margin-bottom: 2rem; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card h2 { color: #e6edf3; font-size: 1.1rem; margin-bottom: 0.75rem; }
+    ol { padding-left: 1.25rem; line-height: 1.8; }
+    .install-wrap { text-align: center; margin: 2rem 0; }
+    esp-web-install-button { --esp-tools-button-color: #238636; --esp-tools-button-text-color: #fff; }
+    esp-web-install-button button { background: #238636; color: #fff; border: none; border-radius: 6px; padding: 0.75rem 2rem; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    esp-web-install-button button:hover { background: #2ea043; }
+    .note { background: #1c2128; border-left: 3px solid #d29922; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; color: #d29922; margin-top: 1rem; }
+    .note strong { color: #e3b341; }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .footer { text-align: center; font-size: 0.85rem; color: #484f58; margin-top: 1rem; }
+    .download { text-align: center; margin: 1rem 0; }
+    .download a { background: #1f6feb; color: #fff; padding: 0.5rem 1.5rem; border-radius: 6px; font-weight: 600; display: inline-block; }
+    .download a:hover { background: #388bfd; text-decoration: none; }
+    /* Serial Monitor */
+    .serial-bar { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; align-items: center; flex-wrap: wrap; }
+    .serial-bar button { border: none; border-radius: 6px; padding: 0.5rem 1.25rem; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    #serialConnect { background: #238636; color: #fff; }
+    #serialConnect:hover { background: #2ea043; }
+    #serialConnect.connected { background: #da3633; }
+    #serialConnect.connected:hover { background: #f85149; }
+    #serialCopy { background: #30363d; color: #c9d1d9; }
+    #serialCopy:hover { background: #484f58; }
+    #serialClear { background: #30363d; color: #c9d1d9; }
+    #serialClear:hover { background: #484f58; }
+    #serialStatus { font-size: 0.8rem; color: #8b949e; margin-left: auto; }
+    #serialOutput { background: #010409; border: 1px solid #30363d; border-radius: 6px; padding: 0.75rem; font-family: "Cascadia Code", "Fira Code", "Consolas", monospace; font-size: 0.8rem; color: #7ee787; height: 320px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; line-height: 1.4; }
+    .serial-input { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .serial-input input { flex: 1; background: #010409; border: 1px solid #30363d; border-radius: 6px; padding: 0.5rem 0.75rem; color: #7ee787; font-family: "Cascadia Code", "Fira Code", "Consolas", monospace; font-size: 0.85rem; outline: none; }
+    .serial-input input:focus { border-color: #58a6ff; }
+    .serial-input input::placeholder { color: #484f58; }
+    #serialSend { background: #238636; color: #fff; border: none; border-radius: 6px; padding: 0.5rem 1rem; font-weight: 600; cursor: pointer; }
+    #serialSend:hover { background: #2ea043; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ESP32-DIV</h1>
+    <p class="subtitle">Kilaz Edition v4.6.4 &mdash; Web Installer</p>
+    <div class="card">
+      <h2>How to Flash</h2>
+      <ol>
+        <li>Connect your <strong>ESP32-S3 (V2 board)</strong> to this computer via USB.</li>
+        <li>Put the device in <strong>Boot/Flash mode</strong>: hold the <strong>BOOT</strong> button, press and release <strong>RESET</strong>, then release <strong>BOOT</strong>.</li>
+        <li>Click the <strong>Install</strong> button below.</li>
+        <li>Select the serial port for your ESP32-S3 when prompted.</li>
+        <li>Wait for the flash to complete &mdash; the device will reboot automatically.</li>
+      </ol>
+      <div class="note">
+        <strong>V2 boards only.</strong> This installer flashes the ESP32-S3 variant.
+      </div>
+    </div>
+    <div class="install-wrap">
+      <esp-web-install-button id="installBtn" manifest="manifest.json">
+        <button slot="activate">Install ESP32-DIV v4.6.4</button>
+        <span slot="unsupported">Your browser does not support Web Serial. Please open this page in <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong> (desktop).</span>
+        <span slot="not-allowed">Serial access was denied. Please grant permission and try again.</span>
+      </esp-web-install-button>
+    </div>
+    <div class="install-wrap" style="margin-top:0;">
+      <esp-web-install-button id="installBtnV15" manifest="manifest-v15.json">
+        <button slot="activate" style="background:#30363d;">Install Original v1.5.0</button>
+      </esp-web-install-button>
+      <p style="font-size:0.8rem; color:#8b949e; margin-top:0.5rem;">CiferTech's original firmware (no Kilaz features)</p>
+    </div>
+    <div class="download">
+      <a href="esp32-div-sdcard.zip">Download SD Card Files (.zip)</a>
+    </div>
+
+    <div class="card">
+      <h2>Serial Monitor</h2>
+      <div class="serial-bar">
+        <button id="serialConnect">Connect</button>
+        <button id="serialClear">Clear</button>
+        <button id="serialCopy">Copy</button>
+        <span id="serialStatus">Disconnected</span>
+      </div>
+      <div id="serialOutput">Click "Connect" and select your ESP32-S3 to view serial output...\n</div>
+      <div class="serial-input">
+        <input type="text" id="serialCmd" placeholder="Type command (HELP, DIAG, STATUS, PCF STATUS...)" />
+        <button id="serialSend">Send</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Requirements</h2>
+      <ol>
+        <li><strong>Browser:</strong> Google Chrome or Microsoft Edge (desktop). Web Serial is not supported in Firefox or Safari.</li>
+        <li><strong>USB cable:</strong> A data-capable USB cable (not charge-only) connected to the ESP32-S3.</li>
+        <li><strong>Drivers:</strong> No extra drivers needed. ESP32-S3 uses native USB.</li>
+      </ol>
+    </div>
+    <div style="text-align:center; margin:1.5rem 0;">
+      <a href="https://s.click.aliexpress.com/e/_c385Xciz" target="_blank"><img src="//ae01.alicdn.com/kf/S89d8f2d76cfe49edb004d70ab3edd7406.jpg_350x350.jpg" /></a>
+    </div>
+    <p class="footer"><a href="https://github.com/ICBizLabs/ESP32-DIV-KILAZ">View project on GitHub</a></p>
+  </div>
+
+  <script>
+    // Cache-bust manifest so firmware updates are always fetched fresh
+    const cb = Date.now();
+    document.getElementById('installBtn').setAttribute('manifest', 'manifest.json?v=' + cb);
+    document.getElementById('installBtnV15').setAttribute('manifest', 'manifest-v15.json?v=' + cb);
+
+    const BAUD = 115200;
+    let port = null;
+    let reader = null;
+    let reading = false;
+
+    const out = document.getElementById('serialOutput');
+    const btn = document.getElementById('serialConnect');
+    const status = document.getElementById('serialStatus');
+
+    btn.addEventListener('click', async () => {
+      if (port) { await disconnect(); return; }
+      try {
+        port = await navigator.serial.requestPort();
+        await port.open({ baudRate: BAUD, bufferSize: 65536 });
+        btn.textContent = 'Disconnect';
+        btn.classList.add('connected');
+        status.textContent = 'Connected @ ' + BAUD + ' baud';
+        reading = true;
+        readLoop();
+      } catch (e) {
+        status.textContent = 'Error: ' + e.message;
+        port = null;
+      }
+    });
+
+    async function readLoop() {
+      while (reading && port && port.readable) {
+        const decoder = new TextDecoderStream();
+        const inputDone = port.readable.pipeTo(decoder.writable);
+        reader = decoder.readable.getReader();
+        try {
+          while (reading) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            if (value) {
+              out.textContent += value;
+              out.scrollTop = out.scrollHeight;
+            }
+          }
+          break;
+        } catch (e) {
+          // Buffer overrun during ESP32 boot is normal — reconnect reader
+          out.textContent += '\n[serial: reconnecting...]\n';
+          status.textContent = 'Reconnecting...';
+        } finally {
+          reader.releaseLock();
+          try { await inputDone; } catch(e) {}
+        }
+        await new Promise(r => setTimeout(r, 100));
+        if (reading) status.textContent = 'Connected @ ' + BAUD + ' baud';
+      }
+    }
+
+    async function disconnect() {
+      reading = false;
+      try { if (reader) reader.cancel(); } catch(e) {}
+      try { if (port) await port.close(); } catch(e) {}
+      port = null;
+      reader = null;
+      btn.textContent = 'Connect';
+      btn.classList.remove('connected');
+      status.textContent = 'Disconnected';
+    }
+
+    document.getElementById('serialClear').addEventListener('click', () => {
+      out.textContent = '';
+    });
+
+    document.getElementById('serialCopy').addEventListener('click', () => {
+      navigator.clipboard.writeText(out.textContent).then(() => {
+        const b = document.getElementById('serialCopy');
+        b.textContent = 'Copied!';
+        setTimeout(() => b.textContent = 'Copy', 1500);
+      });
+    });
+
+    async function sendCmd(text) {
+      if (!port || !port.writable) { status.textContent = 'Not connected'; return; }
+      const encoder = new TextEncoder();
+      const writer = port.writable.getWriter();
+      await writer.write(encoder.encode(text + '\n'));
+      writer.releaseLock();
+    }
+
+    document.getElementById('serialSend').addEventListener('click', () => {
+      const input = document.getElementById('serialCmd');
+      if (input.value.trim()) { sendCmd(input.value.trim()); input.value = ''; }
+    });
+
+    document.getElementById('serialCmd').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const input = document.getElementById('serialCmd');
+        if (input.value.trim()) { sendCmd(input.value.trim()); input.value = ''; }
+      }
+    });
+  </script>
+</body>
+</html>
