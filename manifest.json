@@ -1,14 +1,14 @@
 {
   "name": "ESP32-DIV Kilaz Edition",
-  "version": "4.6.4",
+  "version": "4.6.7",
   "builds": [
     {
       "chipFamily": "ESP32-S3",
       "parts": [
-        { "path": "bootloader.bin?v=4.6.4", "offset": 0 },
-        { "path": "partitions.bin?v=4.6.4", "offset": 32768 },
-        { "path": "boot_app0.bin?v=4.6.4", "offset": 57344 },
-        { "path": "firmware.bin?v=4.6.4",   "offset": 65536 }
+        { "path": "bootloader.bin?v=4.6.7", "offset": 0 },
+        { "path": "partitions.bin?v=4.6.7", "offset": 32768 },
+        { "path": "boot_app0.bin?v=4.6.7", "offset": 57344 },
+        { "path": "firmware.bin?v=4.6.7",   "offset": 65536 }
       ]
     }
   ]
