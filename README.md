@@ -10,6 +10,27 @@
 
 <br />
 
+> **Work in Progress:** This firmware is under active development and not all features may be fully functional on every board revision. If you encounter any problems, please [open an issue](https://github.com/ICBizLabs/ESP32-DIV-KILAZ/issues) and we will try to address them in future releases.
+
+<br />
+
+## Board Revisions
+
+There appear to be different revisions of the V2 board being sold (e.g. v2.0 and v2.1). Differences we have found so far:
+
+| | V2.0 | V2.1 |
+|---|---|---|
+| **PCF8574 Address** | 0x20 | 0x27 |
+| **I2C Pins** | Varies | 8 (SDA), 9 (SCL) |
+| **Button Stability** | Unstable — falls back to touch-only mode | Stable — buttons work normally |
+| **Extra I2C Device** | 0x55 (EEPROM?) present | Not present |
+
+Our firmware auto-detects the board revision at boot by scanning multiple I2C pin pairs and address ranges. If the PCF8574 button expander is not found or is unstable, the device automatically switches to touch-only mode.
+
+If you discover additional board differences, please let us know by [opening an issue](https://github.com/ICBizLabs/ESP32-DIV-KILAZ/issues).
+
+<div>&nbsp;</div>
+
 ## Web Installer
 
 Flash the firmware directly from your browser — no Arduino IDE required.
